@@ -12,13 +12,19 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  user: User = { name: '', email: '', password: '' };
+  user: User = { name: '', email: '', password: '', confirmPassword: ''};
   registrationResponse: string | undefined;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   // Make sure this method is defined correctly
   onSubmit(): void {
+    console.log("confirmPassword", this.user.confirmPassword);
+    console.log("UserPassword", this.user.password);
+    if(this.user.password !== this.user.confirmPassword){
+      this.registrationResponse = "Password do not match";
+      return;
+    }
     this.authService.register(this.user).subscribe({
       next: (response: AuthenticationResponse) => {
         this.registrationResponse = response.message;

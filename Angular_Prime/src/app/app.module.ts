@@ -39,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NotiRequestComponent } from './components/noti-request/noti-request.component';
 import { RequestAnnounceComponent } from './components/request-announce/request-announce.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { AdduserComponent } from './components/adduser/adduser.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     NotificationsComponent,
     NotiRequestComponent,
     RequestAnnounceComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    AdduserComponent,
  ],
   imports: [
     BrowserModule,

@@ -21,8 +21,8 @@
         </a>
         <div class="collapse" id="announceMenu">
           <ul class="list-unstyled ps-3">
-            <li class="text"><a class="dropdown-item text-white" href="#" routerLink="/create-announce">Create Announce</a></li>
-            <li  class="text"><a class="dropdown-item text-white" href="#" routerLink="/schdule-announce">Schedule Announce</a></li>
+            <li *ngIf="authService.isMainHr() || authService.isSubHr()" class="text"><a class="dropdown-item text-white" href="#" routerLink="/create-announce">Create Announce</a></li>
+            <li  *ngIf="authService.isMainHr() || authService.isSubHr()" class="text"><a class="dropdown-item text-white" href="#" routerLink="/schdule-announce">Schedule Announce</a></li>
           </ul>
         </div>
       </li>
@@ -60,10 +60,16 @@
           <span class="text" style="padding-right: 120px;">OTP</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="authService.isMainHr() || authService.isSubHr()" class="nav-item">
         <a href="#" class="nav-link text-white" routerLink="/create-group">
           <i class="bx bx-chat"></i>
           <span class="text" style="padding-right: 120px;">create-group</span>
+        </a>
+      </li>
+      <li class="active">
+        <a href="#dashboard" class="nav-link text-white" routerLink="/adduser">
+          <i class="bx bx-tachometer"></i>
+          <span class="text" style="padding-right: 120px;">Add User</span>
         </a>
       </li>
       <li class="nav-item">
@@ -98,7 +104,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto align-items-center">
             <li class="nav-item">
-              <a class="nav-link" href="#" routerLink="/login">
+              <a class="nav-link" href="#" (click)="logout()">
 
                 <button class="button-24">Logout</button>
               </a>
@@ -114,7 +120,7 @@
             <a href="#" class="nav-link"><i class="bx bx-envelope"></i></a>
             <a href="#" class="nav-link"><i class="bx bx-cog"></i></a>
             <div class="user-profile ms-3">
-             <a href="#" routerLink="/profile"><img src="https://via.placeholder.com/40" alt="User" class="rounded-circle"></a> 
+             <a href="#" routerLink="/profile"><img [src]="userProfilePhotoUrl" alt="User" class="rounded-circle"></a> 
             </div>
           </div>
         </div>
