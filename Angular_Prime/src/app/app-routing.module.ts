@@ -18,11 +18,11 @@ import { UpcommingAnnounceComponent } from './components/upcomming-announce/upco
 import { AnnounceHistoryComponent } from './components/announce-history/announce-history.component';
 import { profile } from 'node:console';
 import { ProfileComponent } from './components/profile/profile.component';
-import { AlertComponent } from './components/alert/alert.component';
 import { GroupCreateComponent } from './components/group-create/group-create.component';
 import { AuthGuard } from './guards/guard';
 import { RequestAnnounceComponent } from './components/request-announce/request-announce.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { UserCreateAdmin } from './components/user-create-admin/user-create-admin.component';
 import { AdduserComponent } from './components/adduser/adduser.component';
 
 const routes: Routes = [
@@ -47,6 +47,10 @@ const routes: Routes = [
       {path:'upcoming-announce',component:UpcommingAnnounceComponent},
       {path:'announce-history',component:AnnounceHistoryComponent},
       {path:'profile',component:ProfileComponent},
+
+      {path:'user-create',component:UserCreateAdmin},
+
+
       {path:'alert',component:AlertComponent},
       {path:'create-group',component:GroupCreateComponent, canActivate: [AuthGuard], data: { expectedRole: ['MAIN_HR', 'SUB_HR'] }},
       {path:'request-announce',component:RequestAnnounceComponent},

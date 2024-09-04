@@ -1,62 +1,65 @@
-
-<title>Request Announce</title>
 <body>
-  <div class="body">
-    <div class="container mt-5">
-        <h2>Announcement Requests</h2>
-        <ul class="list-group">
-
-            <!-- Pending Announcement -->
-            <li class="list-group-item pending" data-bs-toggle="modal" data-bs-target="#detailsModal"
-                data-title="Department Update" data-content="Quarterly update meeting for department heads."
-                data-announcer="John Doe" data-date="August 23, 2024 14:00" data-documents="No documents attached.">
-                <span>Department Update - August 23, 2024</span>
-                <div class="float-end">
-                    <button class="btn btn-success me-2">Approve</button>
-                    <button class="btn btn-danger">Decline</button>
-                </div>
-            </li>
-
-            <!-- Declined Announcement -->
-            <li class="list-group-item declined" data-bs-toggle="modal" data-bs-target="#detailsModal"
-                data-title="System Maintenance" data-content="Scheduled maintenance for all IT systems."
-                data-announcer="Jane Smith" data-date="August 25, 2024 22:00" data-documents="Maintenance schedule attached.">
-                <span>System Maintenance - August 25, 2024</span>
-                <div class="float-end">
-                    <button class="btn btn-primary me-2">Reload</button>
-                    <button class="btn btn-danger">Delete</button>
-                </div>
-            </li>
-
-            <!-- Approved Announcement -->
-            <li class="list-group-item approved" data-bs-toggle="modal" data-bs-target="#detailsModal"
-                data-title="Policy Review" data-content="Annual review of company policies."
-                data-announcer="Mary Johnson" data-date="August 29, 2024 09:00" data-documents="Policy document attached.">
-                <span>Policy Review - August 29, 2024</span>
-                <span class="badge badge-approved float-end">Approved</span>
-            </li>
-
-        </ul>
+  <div class="container mt-5">
+    <h2>Announcement Requests</h2>
+    <ul class="list-group">
+      <!-- Loop through the announcements array and display each item -->
+      <li *ngFor="let announce of announcements" class="list-group-item"
+      [ngClass]="{
+        'pending': announce.status === Status.PENDING,
+        'declined': announce.status === Status.DECLINE,
+        'approved': announce.status === Status.APPROVE,
+        'd-none': announce.status === Status.SOFT_DELETE
+      }"
+      (click)="openModal(announce)">
+    <span>{{ announce.title }} - {{ announce.createat | date: 'MMMM d, y' }}</span>
+    <div class="float-end">
+      <ng-container [ngSwitch]="announce.status">
+        <!-- Pending: Approve & Decline -->
+        <ng-container *ngSwitchCase="Status.PENDING">
+          <button class="btn btn-success me-2" (click)="approveAnnouncement(announce, $event)">Approve</button>
+          <button class="btn btn-danger" (click)="declineAnnouncement(announce, $event)">Decline</button>
+        </ng-container>
+        
+        <!-- Approved: Reload to Pending & Approved Badge -->
+        <ng-container *ngSwitchCase="Status.APPROVE">
+          <!-- <button class="btn btn-warning" (click)="reloadToPending(announce, $event)"><i class='bx bx-repeat'></i></button> -->
+          <span class="badge bg-success">Approved</span>
+        </ng-container>
+  
+        <!-- Declined: Delete & Reload to Pending -->
+        <ng-container *ngSwitchCase="Status.DECLINE">
+          <button class="btn btn-danger me-2" (click)="deleteAnnouncement(announce, $event)"><i class='bx bxs-message-square-x'></i></button>
+          <button class="btn btn-warning" (click)="reloadToPending(announce, $event)"><i class='bx bx-repeat'></i></button>
+        </ng-container>
+      </ng-container>
     </div>
+  </li>
+  
+  
+  
+  
+  
+    </ul>
 
     <!-- Modal for Announcement Details -->
     <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detailsModalLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Content:</strong> <span id="modalContent"></span></p>
-                    <p><strong>Documents:</strong> <span id="modalDocuments"></span></p>
-                    <p><strong>Announcer:</strong> <span id="modalAnnouncer"></span></p>
-                    <p><strong>Date & Time:</strong> <span id="modalDate"></span></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailsModalLabel">{{ selectedAnnouncement?.title }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Content:</strong> {{ selectedAnnouncement?.content }}</p>
+            <p><strong>Documents:</strong> {{ selectedAnnouncement?.cloudUrl ? 'Document attached' : 'No documents attached' }}</p>
+            <p><strong>Announcer:</strong> John Doe</p>
+            <p><strong>Date & Time:</strong> {{ selectedAnnouncement?.createat | date: 'MMMM d, y h:mm a' }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
         </div>
+      </div>
     </div>
-
+  </div>
+</body>

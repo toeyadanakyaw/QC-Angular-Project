@@ -1,0 +1,229 @@
+<!-- Button to trigger modal -->
+<div class="text-center my-5 card-button">
+    <h5 class="card-title">Create Admin User</h5>
+    <p class="card-text">Open the modal to create a new admin user.</p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAdminModal">
+      Open Form
+    </button>
+  </div>
+  <div class="text-center my-5 card-button">
+    <h5 class="card-title">Create Company  </h5>
+    <p class="card-text">Open the modal to create a company  entry.</p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#companyDepartmentModal">
+      Create Company & Department Entry
+    </button>
+  </div>
+  <!-- Button to trigger modal -->
+<div class="text-center my-5 card-button">
+    <h5 class="card-title">Create Department  Entry</h5>
+    <p class="card-text">Open the modal to create a new department entry.</p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#companyDepartmentModal">
+      Create Company & Department Entry
+    </button>
+  </div>
+  <!-- Button to trigger modal -->
+<div class="text-center my-5 card-button">
+    <h5 class="card-title">Create Position Entry</h5>
+    <p class="card-text">Open the modal to create a new position entry.</p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#positionDetailsModal">
+      Create Position Entry
+    </button>
+  </div>
+  
+  <!-- Bootstrap Modal for Position Input, Company Select, and Department Select -->
+  <div class="modal fade" id="positionDetailsModal" tabindex="-1" aria-labelledby="positionDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="positionDetailsModalLabel">Position Details Entry</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Form inside modal body -->
+          <form>
+            <!-- Position Input -->
+            <div class="form-group mb-3">
+              <label for="positionName">Position Name</label>
+              <input type="text" class="form-control" id="positionName" placeholder="Enter position name" required>
+            </div>
+  
+            <!-- Company Select -->
+            <div class="form-group mb-3">
+              <label for="positionCompany">Company</label>
+              <select class="form-control" id="positionCompany">
+                <option value="companyA">Company A</option>
+                <option value="companyB">Company B</option>
+              </select>
+            </div>
+  
+            <!-- Department Select -->
+            <div class="form-group mb-3">
+              <label for="positionDepartment">Department</label>
+              <select class="form-control" id="positionDepartment">
+                <option value="hr">HR</option>
+                <option value="it">IT</option>
+              </select>
+            </div>
+  
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bootstrap Modal for Company Select and Department Input -->
+  <div class="modal fade" id="companyDepartmentModal" tabindex="-1" aria-labelledby="companyDepartmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="companyDepartmentModalLabel">Company & Department Entry</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Form inside modal body -->
+          <form>
+            <!-- Company Select -->
+            <div class="form-group mb-3">
+              <label for="company">Company</label>
+              <select class="form-control" id="company">
+                <option value="companyA">Company A</option>
+                <option value="companyB">Company B</option>
+              </select>
+            </div>
+  
+            <!-- Department Input -->
+            <div class="form-group mb-3">
+              <label for="departmentName">Department Name</label>
+              <input type="text" class="form-control" id="departmentName" placeholder="Enter department name" required>
+            </div>
+  
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="createAdminModal" tabindex="-1" aria-labelledby="createAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createAdminModalLabel">Create Admin User</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Form inside modal body -->
+          <form>
+            <!-- Name -->
+            <div class="form-group mb-3">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter name" required>
+            </div>
+  
+            <!-- Email -->
+            <div class="form-group mb-3">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+            </div>
+  
+            <!-- Phone Number -->
+            <div class="form-group mb-3">
+              <label for="phone">Phone Number</label>
+              <input type="text" class="form-control" id="phone" placeholder="Enter phone number" required>
+            </div>
+  
+            <!-- Company Select -->
+            <div class="form-group mb-3">
+              <label for="company">Company</label>
+              <select class="form-control" id="company">
+                <option value="companyA">Company A</option>
+                <option value="companyB">Company B</option>
+              </select>
+            </div>
+  
+            <!-- Position Select -->
+            <div class="form-group mb-3">
+              <label for="position">Position</label>
+              <select class="form-control" id="position">
+                <option value="manager">Manager</option>
+                <option value="staff">Staff</option>
+              </select>
+            </div>
+  
+            <!-- Department Select -->
+            <div class="form-group mb-3">
+              <label for="department">Department</label>
+              <select class="form-control" id="department">
+                <option value="hr">HR</option>
+                <option value="it">IT</option>
+              </select>
+            </div>
+  
+            <!-- Role Select -->
+            <div class="form-group mb-3">
+              <label for="role">Role</label>
+              <select class="form-control" id="role">
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
+            </div>
+  
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-block">Create User</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button to trigger modal -->
+
+  
+  <!-- Bootstrap Modal for Company Select and Department Input -->
+  <div class="modal fade" id="companyDepartmentModal" tabindex="-1" aria-labelledby="companyDepartmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="companyDepartmentModalLabel">Company & Department Entry</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Form inside modal body -->
+          <form>
+            <!-- Company Select -->
+            <div class="form-group mb-3">
+              <label for="company">Company</label>
+              <select class="form-control" id="company">
+                <option value="companyA">Company A</option>
+                <option value="companyB">Company B</option>
+              </select>
+            </div>
+  
+            <!-- Department Input -->
+            <div class="form-group mb-3">
+              <label for="departmentName">Department Name</label>
+              <input type="text" class="form-control" id="departmentName" placeholder="Enter department name" required>
+            </div>
+  
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  

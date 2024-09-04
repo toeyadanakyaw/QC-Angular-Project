@@ -4,104 +4,38 @@
 <div class="modal">
     <div class="modal-header">Add New Announcement</div>
     <form>
-        <label for="announcementTitle" class="form-label">Announcement Title</label>
         <input type="text" class="input-field" id="announcementTitle" placeholder="Enter the title" required>
 
         <div class="quill-editor" id="announcementEditor"></div>
         
-        <label for="companySelect" class="form-label">Select Company</label>
-        <div class="select-box-container">
-            <div class="select-box">
-                <div class="square-box">
-                    <span class="plus-sign">+</span> Option 1
-                </div>
-                <div class="square-box">
-                    <span class="plus-sign">+</span> Option 2
-                </div>
-                <div class="square-box">
-                    <span class="plus-sign">+</span> Option 3
-                </div>
-                <div class="square-box">
-                    <span class="plus-sign">+</span> Option 4
-                </div>
-                <div class="square-box">
-                    <span class="plus-sign">+</span> Option 5
-                </div>
-            </div>
-        </div>
+       <label for="companySelect" class="form-label">Select Company</label>
+  <div class="select-box-container">
+    <div class="select-box">
+      <div *ngFor="let company of companies" class="square-box" (click)="onCompanySelect(company)">
+        {{ company.name }}
+      </div>
+    </div>
+  </div>
         
         <label for="departmentSelect" class="form-label">Select Department</label>
         <div class="select-box-container">
-            <div class="select-box">
-                <div class="square-box">
-                    <span class="plus-sign">+</span> Option 1
-                </div>
-                <div class="square-box">
-                    <span class="plus-sign">+</span> Option 2
-                </div>
-                <div class="square-box">
-                    <span class="plus-sign">+</span> Option 3
-                </div>
-                <div class="square-box">
-                    <span class="plus-sign">+</span> Option 4
-                </div>
-                <div class="square-box">
-                    <span class="plus-sign">+</span> Option 5
-                </div>
+          <div class="select-box">
+            <div *ngFor="let department of departments" class="square-box" (click)="onDepartmentSelect(department)">
+              {{ department.name }}
             </div>
+          </div>
         </div>
        
         <label for="positionSelect" class="form-label">Select Position</label>
         <div class="select-box-container">
             <div class="select-box">
-                <div class="square-box" (click)="onPositionSelectChange('option1')">
-                    <span class="plus-sign">+</span> Option 1
-                </div>
-                <div class="square-box" (click)="onPositionSelectChange('option2')">
-                    <span class="plus-sign">+</span> Option 2
-                </div>
-                <div class="square-box" (click)="onPositionSelectChange('option3')">
-                    <span class="plus-sign">+</span> Option 3
-                </div>
-                <div class="square-box" (click)="onPositionSelectChange('option4')">
-                    <span class="plus-sign">+</span> Option 4
-                </div>
-                <div class="square-box" (click)="onPositionSelectChange('one-by-one')">
-                    <span class="plus-sign">+</span> One by one
-                </div>
+              <div *ngFor="let position of positions" class="square-box" (click)="onPositionSelect(position)">
+           {{ position.name }}
+              </div>
             </div>
-        </div>
+          </div>
         
-        <div *ngIf="showUserSelection">
-            <label for="userSelect" class="form-label">Select Users</label>
-            <div class="select-box-container" id="userSelect">
-                <div class="select-box">
-                    <div class="square-box" (click)="onUserSelectChange('user1')">
-                        <span class="plus-sign">+</span> User 1
-                    </div>
-                    <div class="square-box" (click)="onUserSelectChange('user2')">
-                        <span class="plus-sign">+</span> User 2
-                    </div>
-                    <div class="square-box" (click)="onUserSelectChange('user3')">
-                        <span class="plus-sign">+</span> User 3
-                    </div>
-                    <div class="square-box" (click)="onUserSelectChange('user4')">
-                        <span class="plus-sign">+</span> User 4
-                    </div>
-                    <div class="square-box" (click)="onUserSelectChange('user5')">
-                        <span class="plus-sign">+</span> User 5
-                    </div>
-                </div>
-            </div>
-            <div class="selected-items mt-2">
-                <span *ngFor="let user of selectedUsers; let i = index" class="badge bg-primary me-1">
-                    {{ user }} 
-                    <button type="button" class="btn-close btn-sm" aria-label="Remove" (click)="removeSelectedUser(i)"></button>
-                </span>
-            </div>
-        </div>
-                    <div class="selected-items" id="selectedPositions"></div>
-        
+       
         <label for="scheduleDate" class="form-label">Schedule Date</label>
         <input type="date" class="input-field" id="scheduleDate" required>
         
@@ -110,16 +44,24 @@
         
             <label class="form-label">Attach Document</label>
             <div class="file-input" id="fileInputContainer">
-                <input type="file" id="fileInput" #fileInput accept="image/*, .pdf, .zip" (change)="onFileSelected($event)">
-                <span>Drag and drop a file here or click</span>
-              </div>
-              <small class="text-muted">Accepted formats: PDF, ZIP, Images, etc.</small>
-              
-              <!-- Preview of the selected file -->
-              <div class="file-preview" id="filePreview" #filePreview></div>
+              <input type="file" id="fileInput" accept="image/*, .pdf, .zip" (change)="onFileSelected($event)">
+              <span>Drag and drop a file here or click</span>
+            </div>
+            <small class="text-muted">Accepted formats: PDF, ZIP, Images, etc.</small>
+            
+            <!-- Preview of the selected file -->
+            <div class="file-preview" id="filePreview" #filePreview></div>
+            
         <div>
-            <button type="submit" class="button">Submit</button>
+          <div class="button-container">
+            <!-- Compare user.role with string 'USER' instead of Role.USER -->
+            <button *ngIf="user.role === 'USER'" type="button" class="button" (click)="submitRequest()">Request</button>
+            <button *ngIf="user.role === 'MAIN_HR'" type="button" class="button" >Submit</button>
+          
             <button type="button" class="button cancel">Cancel</button>
+          </div>
+          
+              
         </div>
     </form>
 </div>

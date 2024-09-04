@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
@@ -31,15 +32,20 @@ import { StaffListComponent } from './components/staff-list/staff-list.component
 import { UpcommingAnnounceComponent } from './components/upcomming-announce/upcomming-announce.component';
 import { AnnounceHistoryComponent } from './components/announce-history/announce-history.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { AlertComponent } from './components/alert/alert.component';
 import { GroupCreateComponent } from './components/group-create/group-create.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { WebsocketService } from './services/websocket.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NotiRequestComponent } from './components/noti-request/noti-request.component';
 import { RequestAnnounceComponent } from './components/request-announce/request-announce.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+
+import { AuthInterceptor } from './interceptor/auth.service';
+import { UserCreateAdmin } from './components/user-create-admin/user-create-admin.component';
+import { CheckboxModule } from 'primeng/checkbox';
+
 import { AdduserComponent } from './components/adduser/adduser.component';
+
 
 @NgModule({
   declarations: [
@@ -63,16 +69,17 @@ import { AdduserComponent } from './components/adduser/adduser.component';
     UpcommingAnnounceComponent,
     AnnounceHistoryComponent,
     ProfileComponent,
-    AlertComponent,
     GroupCreateComponent,
     NotificationsComponent,
     NotiRequestComponent,
     RequestAnnounceComponent,
     ChangePasswordComponent,
-    AdduserComponent,
+    UserCreateAdmin
+        AdduserComponent,
  ],
   imports: [
     BrowserModule,
+    NgSelectModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     ProgressBarModule,
@@ -86,11 +93,13 @@ import { AdduserComponent } from './components/adduser/adduser.component';
     ButtonModule,
     FormsModule,  
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CheckboxModule,
   ],
   providers: [
     provideClientHydration(),
-    WebsocketService
+    WebsocketService,
+{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

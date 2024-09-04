@@ -1,41 +1,96 @@
-<div class="import-container" *ngIf="userRole === 'MAIN_HR' || userRole === 'SUB_HR'">
-  <input type="file" id="fileInput" class="file-input" accept=".xlsx, .xls, .csv" (change)="onFileChange($event)"/>
-  <button type="button" class="import-button" (click)="uploadExcel()">Import Excel</button>
-  <p>{{uploadStatus}}</p>
-</div>
+<div class="card">
+  <div class="header-container">
+    
+    <div class="search-container">
+      <input 
+        pInputText 
+        type="text" 
+        (input)="onGlobalFilter($event, dt2)" 
+        placeholder="Search keyword" 
+        class="p-inputtext p-component" />
+    </div>
+    <div class="import-container">
+      <input type="file" id="fileInput" class="file-input" accept=".xlsx, .xls, .csv" />
+      <button type="button" class="import-button">Import Excel</button>
+    </div>
+  </div>
 
-<div class="search-container">
-  <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" placeholder="Search by Name, Department, or Company"/>
+  <p-table
+    #dt2
+    [value]="staff"
+    dataKey="id"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [loading]="loading"
+    [paginator]="true"
+    [globalFilterFields]="['name', 'email', 'position', 'company', 'department']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+  >
+    <ng-template pTemplate="caption">
+      <!-- Caption template is not needed anymore -->
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:10%">#</th>
+        <th style="width:20%">Name</th>
+        <th style="width:20%">Email</th>
+        <th style="width:20%">Position</th>
+        <th style="width:15%">Company</th>
+        <th style="width:15%">Department</th>
+      </tr>
+      <tr>
+     
+        <th>
+          <p-columnFilter 
+            type="text"
+            field="name" 
+            placeholder="Search by name" 
+            ariaLabel="Filter Name" />
+        </th>
+        <th>
+          <p-columnFilter 
+            type="text"
+            field="email" 
+            placeholder="Search by email" 
+            ariaLabel="Filter Email" />
+        </th>
+        <th>
+          <p-columnFilter 
+            type="text"
+            field="position" 
+            placeholder="Search by position" 
+            ariaLabel="Filter Position" />
+        </th>
+        <th>
+          <p-columnFilter 
+            type="text"
+            field="company" 
+            placeholder="Search by company" 
+            ariaLabel="Filter Company" />
+        </th>
+        <th>
+          <p-columnFilter 
+            type="text"
+            field="department" 
+            placeholder="Search by department" 
+            ariaLabel="Filter Department" />
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-staffMember>
+      <tr>
+        <td>{{ staffMember.id }}</td>
+        <td>{{ staffMember.name }}</td>
+        <td>{{ staffMember.email }}</td>
+        <td>{{ staffMember.position }}</td>
+        <td>{{ staffMember.company }}</td>
+        <td>{{ staffMember.department }}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6">No staff members found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
-
-<div class="export-controller">
-  <button type="button" class="export-button" (click)="exportToExcel()">Download by excel</button>
-  <button type="button" class="export-button" (click)="exportToPDF()">Download by pdf</button>
-</div>
-
-<table class="custom-table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Staff Id</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Position</th>
-      <th scope="col">Department</th>
-      <th scope="col">Company</th>
-      <th scope="col">Role</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let user of filteredUsers; let i = index">
-    <tr>
-      <th scope="row">{{i+1}}</th>
-      <td>{{user.staff_id}}</td>
-      <td>{{user.name}}</td>
-      <td>{{user.email}}</td>
-      <td>{{user.position.name}}</td>
-      <td>{{user.department.name}}</td>      
-      <td>{{user.company.name}}</td>
-      <td>{{user.role}}</td>
-    </tr>
-  </tbody>
-</table>

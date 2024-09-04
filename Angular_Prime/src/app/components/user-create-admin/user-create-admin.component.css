@@ -1,0 +1,92 @@
+.user-form-card {
+    border-radius: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .user-form-card .card-header {
+    background-color: #4e73df;
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  
+  .user-form-card .form-control {
+    border-radius: 10px;
+  }
+  
+  .user-form-card .form-check-label {
+    font-weight: bold;
+    margin-left: 20px;
+  }
+  
+  .user-form-card .btn-primary {
+    background-color: #4e73df;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+  }
+  
+  .user-form-card .btn-primary:hover {
+    background-color: #2e59d9;
+  }
+  
+  .user-form-card .form-group {
+    padding: 10px 0;
+  }
+  
+  /* Checkbox group styling with reduced space between checkboxes */
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px; /* Reduced gap between checkboxes */
+  }
+  
+  .checkbox-group .form-check {
+    flex: 1 0 30%; /* Adjust to make checkboxes smaller */
+    display: flex;
+    align-items: center;
+    margin-right: 5px; /* Small margin to adjust spacing */
+  }
+  
+  .checkbox-group .form-check-input {
+    margin-right: 3px; /* Reduce the space between checkbox and label */
+    margin-left: 0; /* Remove any left margin */
+  }
+  .card-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    background-color: #f8f9fa; /* Light background color for card effect */
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .card-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card-button .btn {
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+  }
+  

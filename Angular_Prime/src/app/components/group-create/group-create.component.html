@@ -94,7 +94,29 @@
             </div>
           </div>
         </div>
+        <div class="mb-3">
+          <button class="btn btn-primary" onclick="addStaff('group1')">Add Staff</button>
+          <button class="btn btn-danger" onclick="deleteGroup('group1')">Delete Group</button>
+        </div>
+      </div>
+
+      <!-- You can add more group cards here -->
+      <div class="group-card">
+        <h5 class="group-title">Group 2</h5>
+        <button class="btn btn-primary" type="button" onclick="toggleStaff('group2')">
+          3 Staff Members
+        </button>
+        <div id="collapse-group2" class="collapse">
+          <ul class="staff-list">
+            <li>User 3 (user3example.com)</li>
+            <li>User 4 (user4example.com)</li>
+            <li>User 5 (user5example.com)</li>
+          </ul>
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-primary" onclick="addStaff('group2')">Add Staff</button>
+          <button class="btn btn-danger" onclick="deleteGroup('group2')">Delete Group</button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+

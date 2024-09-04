@@ -1,9 +1,9 @@
 <div class="body">
-    
     <div class="login-container">
-  <div *ngIf="alert">
-        <app-alert [type]="alert.type" [title]="alert.title" [message]="alert.message"></app-alert>
-      </div>
+        <div *ngIf="lockDuration > 0" class="lock-message">
+            <p>Your account is locked. Please try again in {{ lockDuration }} minute(s).</p>
+        </div>
+
         <div class="login-logo">
             <div class="ace">ACE</div>
             <div class="data-system">Data System</div>
@@ -14,7 +14,6 @@
         <div class="forgot-password-text" style="color: white;">
             Enter your email address below and we'll send you instructions on how to reset your password.
         </div>
-       
         <form (ngSubmit)="onSubmit()" #loginForm="ngForm">            
             <div class="mb-3">
                 <input type="email" class="form-control" placeholder="Email" [(ngModel)]="user.email" name="email" required>
@@ -29,19 +28,9 @@
                 <a href="#" routerLink="/change-password" class="forgot-password">Change Password?</a>
             </div>
             <div class="mb-3">
-                <a href="#" routerLink="/register" class="forgot-password">Don't have an accound?</a>
+                <a href="#" routerLink="/register" class="forgot-password">Don't have an account?</a>
             </div>
-            <button type="submit" class="btn btn-square">Login</button>
-          <!-- <a href="" routerLink="/dashboard"class="btn btn-square" (click)="onLoginFail()">Submit</a>  
-          <button type="button" (click)="onLoginFail()">Fails</button>
-<button type="button" (click)="onLoginSuccess()">Success</button>
-<button type="button" (click)="info()">info</button>
-<button type="button" (click)="warning()">warning</button> -->
+            <button type="submit" class="btn btn-square" [disabled]="lockDuration > 0">Login</button>
         </form>
     </div>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
 </div>
