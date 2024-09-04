@@ -5,6 +5,8 @@ import { CookieService } from './cookie.service';
 import { map, Observable } from 'rxjs';
 import { AuthenticationResponse } from '../models/authicatation';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
+import { UserData } from '../models/userdata';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ import { isPlatformBrowser } from '@angular/common';
 export class AuthService {
   private baseUrl = 'http://localhost:8080/api/user';
 
-  constructor( private http: HttpClient, private cookieService: CookieService , @Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor( private router:Router, private http: HttpClient, private cookieService: CookieService , @Inject(PLATFORM_ID) private platformId: Object) { }
 
   register(user: User): Observable<AuthenticationResponse>{
     let url = this.baseUrl + "/register";
@@ -46,7 +48,19 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('authToken');
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('authToken');
+    }
+    return null;
+  }
+
+  getLoginUserData(): UserData | null{
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload;
   }
 
   getUserRole(): string | null {
@@ -58,13 +72,40 @@ export class AuthService {
     return payload.role;
   }
 
+  getCompanyId(): number | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.companyId;
+  }
+
+  getDepartmentId(): number | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.departmentId;
+  }
+
+  getPosition(): string | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.position;
+  }
+
   getUserId(): string | null {
     const token = this.getToken();
     if (!token) {
       return null;
     }
     const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload.id;
+    return payload.userId;
   }
 
   isAdmin(): boolean {
@@ -77,5 +118,18 @@ export class AuthService {
       return user !== null;
     }
     return false;
+  }
+
+  isMainHr(): boolean {
+    return this.getUserRole() === 'MAIN_HR';
+  }
+
+  isSubHr(): boolean {
+    return this.getUserRole() === 'SUB_HR'
+  }
+
+  logout(): void {
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/login']);
   }
 }

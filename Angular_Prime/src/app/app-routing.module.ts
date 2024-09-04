@@ -23,6 +23,7 @@ import { GroupCreateComponent } from './components/group-create/group-create.com
 import { AuthGuard } from './guards/guard';
 import { RequestAnnounceComponent } from './components/request-announce/request-announce.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { AdduserComponent } from './components/adduser/adduser.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -40,15 +41,16 @@ const routes: Routes = [
       { path: 'group-list', component: GroupListComponent },
       { path: 'chat', component: ChatComponent },
       { path: 'schdule-announce', component: ScheduleAnnounceComponent },
-      { path: 'create-announce', component: CreateAnnounceComponent },
+      { path: 'create-announce', component: CreateAnnounceComponent, canActivate: [AuthGuard], data: { expectedRole: ['MAIN_HR', 'SUB_HR'] } },
       { path: 'asknowledge', component: AsknowledgeComponent },
-      { path: 'staff-list', component: StaffListComponent },
-    {path:'upcoming-announce',component:UpcommingAnnounceComponent},
-    {path:'announce-history',component:AnnounceHistoryComponent},
+      { path: 'staff-list', component: StaffListComponent, canActivate: [AuthGuard], data: { expectedRole: ['MAIN_HR', 'SUB_HR', 'MANAGEMENT'] } },
+      {path:'upcoming-announce',component:UpcommingAnnounceComponent},
+      {path:'announce-history',component:AnnounceHistoryComponent},
       {path:'profile',component:ProfileComponent},
       {path:'alert',component:AlertComponent},
-      {path:'create-group',component:GroupCreateComponent},
+      {path:'create-group',component:GroupCreateComponent, canActivate: [AuthGuard], data: { expectedRole: ['MAIN_HR', 'SUB_HR'] }},
       {path:'request-announce',component:RequestAnnounceComponent},
+      {path:'adduser',component:AdduserComponent}
 
     ]
   }

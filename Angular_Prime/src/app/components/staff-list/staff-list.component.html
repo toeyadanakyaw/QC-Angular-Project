@@ -1,43 +1,41 @@
-<div class="import-container">
-  <input type="file" id="fileInput" class="file-input" accept=".xlsx, .xls, .csv" />
-  <button type="button" class="import-button">Import Excel</button>
+<div class="import-container" *ngIf="userRole === 'MAIN_HR' || userRole === 'SUB_HR'">
+  <input type="file" id="fileInput" class="file-input" accept=".xlsx, .xls, .csv" (change)="onFileChange($event)"/>
+  <button type="button" class="import-button" (click)="uploadExcel()">Import Excel</button>
+  <p>{{uploadStatus}}</p>
+</div>
+
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" placeholder="Search by Name, Department, or Company"/>
+</div>
+
+<div class="export-controller">
+  <button type="button" class="export-button" (click)="exportToExcel()">Download by excel</button>
+  <button type="button" class="export-button" (click)="exportToPDF()">Download by pdf</button>
 </div>
 
 <table class="custom-table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
+      <th scope="col">Staff Id</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Position</th>
-      <th scope="col">Company</th>
       <th scope="col">Department</th>
+      <th scope="col">Company</th>
+      <th scope="col">Role</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody *ngFor="let user of filteredUsers; let i = index">
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>mdo</td>
-      <td>Otto</td>
-      <td>mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>fat</td>
-      <td>Thornton</td>
-      <td>fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>twitter</td>
-      <td>the Bird</td>
-      <td>twitter</td>
+      <th scope="row">{{i+1}}</th>
+      <td>{{user.staff_id}}</td>
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.position.name}}</td>
+      <td>{{user.department.name}}</td>      
+      <td>{{user.company.name}}</td>
+      <td>{{user.role}}</td>
     </tr>
   </tbody>
 </table>

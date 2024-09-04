@@ -21,7 +21,7 @@ interface Alert {
 })
 export class LoginComponent {
   alert: Alert | null = null;
-  user: User = { name: '', email: '', password: '' };
+  user: User = { name: '', email: '', password: '', confirmPassword:'' };
   loginResponse: string | undefined;
 
 
@@ -69,7 +69,9 @@ export class LoginComponent {
           this.loginResponse = response.message;
           this.router.navigate(['/dashboard']);
       },
-      (error) => {
+      (
+      
+      ) => {
         this.loginResponse = 'Login failed';
         // Handle error
       }
