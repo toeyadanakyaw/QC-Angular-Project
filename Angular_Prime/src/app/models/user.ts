@@ -1,4 +1,5 @@
 export interface User{
+    id?: number;
     name: string
     email: string;
     password: string;
@@ -11,4 +12,3 @@ export enum Role {
     MODERATOR = 'MODERATOR',
     MAIN_HR = 'MAIN_HR'
   }
-  

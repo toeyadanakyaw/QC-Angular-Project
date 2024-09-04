@@ -39,9 +39,13 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NotiRequestComponent } from './components/noti-request/noti-request.component';
 import { RequestAnnounceComponent } from './components/request-announce/request-announce.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+
 import { AuthInterceptor } from './interceptor/auth.service';
 import { UserCreateAdmin } from './components/user-create-admin/user-create-admin.component';
 import { CheckboxModule } from 'primeng/checkbox';
+
+import { AdduserComponent } from './components/adduser/adduser.component';
+
 
 @NgModule({
   declarations: [
@@ -71,7 +75,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     RequestAnnounceComponent,
     ChangePasswordComponent,
     UserCreateAdmin
-    
+        AdduserComponent,
  ],
   imports: [
     BrowserModule,

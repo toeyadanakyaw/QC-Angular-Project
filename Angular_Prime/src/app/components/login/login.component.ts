@@ -23,12 +23,15 @@
     lockDuration: number = 0;
 lockTimer: any;
 
-    alert: Alert | null = null;
-    user: User = {
-      name: '', email: '', password: '', confirmPassword: '',
-      // role: ''
-    };
-    loginResponse: string | undefined;
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+  alert: Alert | null = null;
+  user: User = { name: '', email: '', password: '', confirmPassword:'' };
+  loginResponse: string | undefined;
 
     // Inject AuthService and Router in the constructor
     constructor(
@@ -94,6 +97,7 @@ lockTimer: any;
     startLockCountdown(): void {
       if (this.lockTimer) {
         clearInterval(this.lockTimer);
+
       }
     
       this.lockTimer = setInterval(() => {

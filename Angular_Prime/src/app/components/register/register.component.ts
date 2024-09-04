@@ -21,12 +21,11 @@ export class RegisterComponent {
   onSubmit(): void {
     console.log("confirmPassword", this.user.confirmPassword);
     console.log("UserPassword", this.user.password);
-    
-    if (this.user.password !== this.user.confirmPassword) {
-      this.registrationResponse = "Passwords do not match";
+
+    if(this.user.password !== this.user.confirmPassword){
+      this.registrationResponse = "Password do not match";
       return;
     }
-  
     this.authService.register(this.user).subscribe({
       next: (response: AuthenticationResponse) => {
         this.registrationResponse = response.message;

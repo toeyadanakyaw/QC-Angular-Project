@@ -4,6 +4,8 @@ import { User } from '../models/user';
 import { map, Observable } from 'rxjs';
 import { AuthenticationResponse } from '../models/authicatation';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
+import { UserData } from '../models/userdata';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +13,7 @@ import { isPlatformBrowser } from '@angular/common';
 export class AuthService {
   private baseUrl = 'http://localhost:8080/api/user';
 
-  constructor(
-    private http: HttpClient, 
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  constructor( private router:Router, private http: HttpClient, private cookieService: CookieService , @Inject(PLATFORM_ID) private platformId: Object) { }
 
   // User registration
   register(user: User): Observable<AuthenticationResponse> {
@@ -44,7 +43,19 @@ export class AuthService {
 
   // Fetch token from localStorage
   getToken(): string | null {
-    return localStorage.getItem('authToken');
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('authToken');
+    }
+    return null;
+  }
+
+  getLoginUserData(): UserData | null{
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload;
   }
 
   // Extract the user role from the JWT token
@@ -57,8 +68,34 @@ export class AuthService {
     return payload.role;
   }
 
-  // Extract the user ID from the JWT token
-  getUserId(): number | null {
+  getCompanyId(): number | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.companyId;
+  }
+
+  getDepartmentId(): number | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.departmentId;
+  }
+
+  getPosition(): string | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.position;
+  }
+
+  getUserId(): string | null {
     const token = this.getToken();
     if (!token) {
       return null;
@@ -80,9 +117,16 @@ export class AuthService {
     }
     return false;
   }
+  isMainHr(): boolean {
+    return this.getUserRole() === 'MAIN_HR';
+  }
 
-  // Log the user out and clear the token
+  isSubHr(): boolean {
+    return this.getUserRole() === 'SUB_HR'
+  }
+
   logout(): void {
     localStorage.removeItem('authToken');
+    this.router.navigate(['/login']);
   }
 }
