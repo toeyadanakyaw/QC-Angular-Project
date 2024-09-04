@@ -20,9 +20,7 @@ export class DashboardComponent implements AfterViewInit {
   alert: Alert | null = null;
 
   constructor(private router: Router, private alertService: AlertService) {
-    this.alertService.alert$.subscribe(alert => {
-      this.alert = alert;
-    });
+    
   }
 
   @ViewChild('dt') dt: Table | undefined;

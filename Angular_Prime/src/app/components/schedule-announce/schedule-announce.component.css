@@ -1,369 +1,271 @@
 .modal {
+  z-index: 1000; /* Lower than the notification dropdown */
   background-color: #fff;
   border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  max-width: 800px; /* Adjust width as needed */
+  padding: 30px;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
   margin: 50px auto;
   font-family: 'Arial', sans-serif;
   display: block;
-  position: fixed; /* Ensure modal stays in place */
   top: 5%;
-  left: 30%;
-  width: 100%;
-  max-width: 900px;
-  max-height: 100vh; /* Limit modal height to prevent overflowing the screen */
+  left: 250px;
+  right: 0;
+  transform: none;
+  width: calc(100% - 250px);
+  height: 100vh;
   overflow-y: auto;
-}
-.modal:hover {
-  transform: translateY(-5px); /* A slight hover animation for the modal */
+  padding-bottom: 100px;
 }
 
-/* Modal header */
-.modal-header {
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 25px;
-  color: #333;
-  text-align: center;
-  border-bottom: 2px solid #0073aa; /* Subtle underline for header */
-  padding-bottom: 15px;
-}
-
-/* Input fields */
-.input-field {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-  background-color: #f9f9f9;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-.input-field:focus {
-  border-color: #0073aa; /* Change border color on focus */
-  background-color: #fff; /* Make background solid white on focus */
-}
-
-/* Labels */
-.form-label {
-  font-weight: 500;
-  margin-bottom: 8px;
-  display: block;
-  color: #0073aa;
-  font-size: 18px;
-}
-
-/* Text Area */
-.text-area {
-  width: calc(100% - 20px);
-  height: 150px;
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-}
-
-/* Buttons */
-.button {
-  background-color: #0073aa;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-right: 15px;
-}
-
-.button:hover {
-  background-color: #005f8a;
-  transform: translateY(-3px); /* Slight hover lift effect */
-}
-
-.button.cancel {
-  background-color: #a0a5aa;
-}
-
-.button.cancel:hover {
-  background-color: #888;
-  transform: translateY(-3px); /* Same hover effect for cancel button */
-}
-
-/* Select box container */
-.select-box-container {
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-radius: 8px;
-  width: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px; /* Added spacing between sections */
-}
-
-/* Select box grid */
-.select-box {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 15px; /* More space between boxes */
-}
-
-/* Square boxes */
-.square-box {
-  background-color: #444;
-  border: 2px solid #5561ff;
-  border-radius: 10px;
-  padding: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s ease;
-  color: #fff;
-  font-size: 16px;
-  text-align: center;
-  width: 120px;
-  height: 50px;
-}
-
-.square-box:hover {
-  background-color: #5561ff;
-  transform: scale(1.05); /* Hover effect enlarges box slightly */
-}
-
-.square-box.selected {
-  background-color: #00b300; /* Color for selected boxes */
-  transform: scale(1.05); /* Slight scale for selected */
-}
-
-.plus-sign {
-  margin-right: 8px;
-  color: #fff;
-}
-
-/* Selected items section */
-.selected-items {
-  margin-top: 20px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #0073aa;
-}
-/* Quill Editor container styling */
-.quill-editor {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  height: 200px; /* Increased height for a word-like feel */
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Word-like font */
-  margin-bottom: 20px;
-  font-size: 16px; /* Font size like Word */
-  line-height: 1.5; /* Good line height for readability */
-}
-
-.ql-editor {
-  min-height: 100%;
-  padding: 15px;
-  font-size: 16px;
-  background-color: white; /* White background to mimic Word document */
-  border-radius: 5px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Toolbar styling for a clean, modern look */
-.ql-toolbar {
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  padding: 5px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Button styling inside Quill toolbar */
-.ql-toolbar button {
-  background-color: #0073aa;
-  color: white;
-  border-radius: 4px;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-
-/* Dropdown styling for toolbar buttons */
-.ql-toolbar .ql-picker {
-  background-color: #0073aa;
-  color: white;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-}
-/* Button styling */
-.button {
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 10px 0;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  background-color: #4CAF50; /* Submit button background */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #45a049; /* Slightly darker green on hover */
-}
-
-.cancel {
-  background-color: #f44336; /* Cancel button background */
-}
-
-.cancel:hover {
-  background-color: #e53935; /* Slightly darker red on hover */
-}
-/* Buttons */
-.button {
-  display: inline-block;
-  padding: 12px 25px;
-  margin: 10px 0;
-  font-size: 18px;
-  font-weight: 600;
-  text-align: center;
-  text-decoration: none;
-  background: linear-gradient(135deg, #6e8efb, #a777e3); /* Gradient background */
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow for 3D effect */
-}
-
-.button:hover {
-  background: linear-gradient(135deg, #5a76db, #9460d0); /* Darker gradient on hover */
-  transform: translateY(-3px); /* Lift effect on hover */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Stronger shadow on hover */
-}
-
-.button:active {
-  transform: translateY(1px); /* Slight press down effect on click */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Lighter shadow when clicked */
-}
-
-/* Cancel button with a different color scheme */
-.button.cancel {
-  background: linear-gradient(135deg, #f44336, #e53935); /* Red gradient for cancel button */
-}
-
-.button.cancel:hover {
-  background: linear-gradient(135deg, #e53935, #d32f2f); /* Darker red on hover */
-}
-
-/* Disabled button styles */
-.button:disabled {
-  background: #ccc; /* Greyed-out background */
-  cursor: not-allowed; /* Disabled cursor */
-  transform: none; /* No hover or click effect */
-  box-shadow: none; /* No shadow */
-}
-
-/* Icon inside button */
-.button i {
-  margin-right: 8px; /* Space between icon and text */
-}
-
-/* Adding animation */
-.button {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
+  .modal-header {
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    background-color: #0073aa; /* Solid background color */
+    padding: 20px; /* Increased padding for better space */
+    border-radius: 12px 12px 0 0; /* Rounded top corners */
+    position: relative; /* Position relative for pseudo-elements */
   }
-  50% {
-    transform: scale(1.03);
+
+  /* Icon */
+  .modal-header::before {
+    content: '📣'; /* Example icon (can replace with font-icon or SVG) */
+    font-size: 30px; /* Icon size */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the icon */
   }
-  100% {
-    transform: scale(1);
+
+
+  /* Enhanced Title Input Field */
+  #announcementTitle {
+    width: 100%;
+    padding: 15px; /* Increased padding for more height */
+    margin-bottom: 15px; /* Spacing below the title input */
+    border: 2px solid #0073aa; /* Thicker border for emphasis */
+    border-radius: 10px; /* Softer corners */
+    font-size: 18px; /* Larger font size */
+    font-weight: 500; /* Bolder font for clarity */
+    background-color: #f9f9f9; /* Light background */
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Smooth transition on focus */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   }
-}
-.file-input {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed #ccc;
-  border-radius: 10px;
-  height: 60px;
-  text-align: center;
-  cursor: pointer;
-  color: #999;
-  font-size: 16px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  transition: all 0.3s ease;
-}
 
-.file-input:hover {
-  background-color: #f0f0f0;
-  border-color: #6c63ff;
-  color: #6c63ff;
-}
 
-.file-input input[type="file"] {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
+  .input-field {
+    width: 100%;
+    padding: 14px 16px; /* Added padding for a more spacious feel */
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px; /* Increased border-radius for a smoother look */
+    font-size: 16px;
+    background-color: #fff;
+    transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  }
 
-.file-preview {
-  margin-top: 20px;
-  text-align: center;
-}
+  .input-field:focus {
+    border-color: #0073aa;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(0, 115, 170, 0.2); /* Added shadow on focus */
+    outline: none; /* Remove default outline */
+  }
 
-.file-preview img {
-  max-width: 200px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
-  transition: transform 0.3s ease;
-}
+  /* Placeholder styling */
+  .input-field::placeholder {
+    color: #888; /* Subtle placeholder text color */
+  }
 
-.file-preview img:hover {
-  transform: scale(1.05);
-}
+  /* Labels */
+  .form-label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+    color: #0073aa;
+    font-size: 18px;
+  }
 
-.file-preview p {
-  font-weight: bold;
-  color: #333;
-}
-/* Title input field */
-.input-field {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: 16px;
-  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
-  transition: border 0.3s ease;
-}
+  /* Buttons */
+  .button {
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    padding: 12px 20px; /* Adjusted padding */
+    border-radius: 8px; /* Increased border-radius */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 15px;
+  }
 
-.input-field:focus {
-  border-color: #007bff;
-  outline: none;
-}
+  .button:hover {
+    background-color: #005f8a;
+    transform: translateY(-3px);
+  }
+
+  .button.cancel {
+    background-color: #a0a5aa;
+  }
+
+  .button.cancel:hover {
+    background-color: #888;
+  }
+
+  /* Select box container */
+  /* Select box container */
+  .select-box-container {
+    background-color: #ffffff; /* Cleaner white background */
+    padding: 20px;
+    border-radius: 12px; /* Softer rounded corners */
+    width: 100%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+    margin-bottom: 20px; /* Space between sections */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  }
+
+  /* Select box grid */
+  .select-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjusted min-width for better fit */
+    gap: 20px; /* Increased gap for better spacing */
+  }
+
+  /* Square boxes */
+  .square-box {
+    background-color: #ffffff; /* Changed to white for a cleaner look */
+    border: 2px solid #0073aa; /* Updated border color */
+    border-radius: 12px; /* Increased border-radius */
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+    color: #0073aa; /* Updated text color to match border */
+    font-size: 16px;
+    text-align: center;
+    width: 150px; /* Adjusted width for better fit */
+    height: 60px; /* Adjusted height for better fit */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box-shadow for depth */
+  }
+
+  .square-box:hover {
+    background-color: #e6f0ff; /* Light blue background on hover */
+    transform: translateY(-3px); /* Lift effect on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+  }
+
+  .square-box.selected {
+    background-color: #0073aa; /* Color for selected boxes */
+    color: #ffffff; /* White text color for selected boxes */
+    transform: scale(1.05); /* Slight scale for selected */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for selected state */
+  }
+
+  /* Quill Editor */
+  .quill-editor {
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Increased border-radius */
+    padding: 20px;
+    height: 250px; /* Increased height */
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .ql-editor {
+    min-height: 100%;
+    padding: 15px;
+    font-size: 16px;
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  /* Toolbar styling */
+  .ql-toolbar {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+
+  .ql-toolbar button {
+    background-color: #0073aa;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .ql-toolbar .ql-picker {
+    background-color: #0073aa;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* File input */
+  .file-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    height: 60px;
+    text-align: center;
+    cursor: pointer;
+    color: #999;
+    font-size: 16px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+  }
+
+  .file-input:hover {
+    background-color: #f0f0f0;
+    border-color: #6c63ff;
+    color: #6c63ff;
+  }
+
+  .file-input input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .file-preview {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .file-preview img {
+    max-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  .file-preview img:hover {
+    transform: scale(1.05);
+  }
+
+  .file-preview p {
+    font-weight: bold;
+    color: #333;
+  }
+  .icon {
+    font-size: 24px; /* Increase size of the icon */
+    margin-right: 8px; /* Add some space between the icon and text */
+  }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+declare var coreui: any;
 
 @Component({
   selector: 'app-group-create',
@@ -11,7 +12,16 @@ export class GroupCreateComponent {
   groups: { id: string, name: string, staff: string[] }[] = [];
   selectedGroupStaff: string[] = [];
   selectedGroup: { id: string, name: string } | null = null;
-
+  staffMembers = [
+    { id: 1, name: 'John Doe' },
+    { id: 2, name: 'Jane Smith' },
+    { id: 3, name: 'Jack Daniels' }
+  ];
+  selectedStaffMembers = [];
+  ngAfterViewInit() {
+    // Initialize CoreUI select elements
+    coreui.MultiSelect.init(document.querySelector('#ms1'));
+  }
   updateSelectedStaff(selectedOptions: string[]): void {
     this.selectedStaff = [...new Set([...this.selectedStaff, ...selectedOptions])];
     this.selectedStaffDisplay = this.selectedStaff.join(', ');

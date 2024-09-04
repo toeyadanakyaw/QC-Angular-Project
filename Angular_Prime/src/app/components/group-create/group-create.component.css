@@ -1,35 +1,43 @@
-/* Container for the form */
-.form-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #ddd; /* Light border for distinction */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  margin-top: 40px;
+/* General Reset */
+body, h3, h5, button, input, select {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Styling for the card deck */
+/* Body Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7f9;
+  color: #333;
+  padding: 20px;
+}
+
+/* Group List Container */
+.group-list-container {
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* Card Deck */
 .card-deck {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
-/* Styling for each card */
 .card {
   background-color: #ffffff;
-  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  flex: 1;
+  min-width: 280px;
 }
 
 .card-body {
@@ -37,57 +45,172 @@
 }
 
 .card-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 10px;
+  font-size: 1.25em;
+  margin-bottom: 15px;
+  color: #3498db;
 }
 
-.card-text {
-  font-size: 1rem;
-  font-weight: 400;
-  margin-bottom: 10px;
-}
-
-/* Styling for the staff list within the card */
-.staff-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.staff-list li {
-  padding: 5px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.staff-list li:last-child {
-  border-bottom: none;
-}
-
-/* Styling for the submit button */
-.btn-submit {
+/* Button Styling */
+.btn {
   display: inline-block;
   padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #ffffff;
-  background-color: #007bff;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.btn-submit:hover {
-  background-color: #0056b3;
-  transform: scale(1.02);
+.btn-primary {
+  background-color: #3498db;
+  color: #ffffff;
 }
 
-.btn-submit:active {
-  background-color: #004494;
+.btn-primary:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
 }
 
-/* Margin for form elements */
-.mb-3 {
-  margin-bottom: 1rem;
+.btn-primary:active {
+  background-color: #1f4f8d;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+.btn-danger:active {
+  background-color: #a93226;
+}
+
+/* Form Container */
+.form-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.form-control, .form-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  outline: none;
+}
+
+/* Selected Staff Members */
+.selected-staff-container {
+  margin-top: 15px;
+}
+
+.selected-staff-container h5 {
+  font-size: 1.25em;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.selected-staff-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.selected-staff-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+}
+
+/* Collapse Sections */
+.collapse {
+  display: none;
+}
+
+.collapse.show {
+  display: block;
+}
+
+/* List Styling */
+.department-list, .staff-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.department-list li, .staff-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.department-list li:last-child, .staff-list li:last-child {
+  border-bottom: none;
+}
+
+.department-list button {
+  background: none;
+  border: none;
+  color: #3498db;
+  cursor: pointer;
+  padding: 0;
+}
+
+.department-list button:hover {
+  text-decoration: underline;
+}
+
+/* Bottom Groups */
+.bottom-groups {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.group-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  flex: 1;
+  margin: 0 10px;
+}
+
+.group-title {
+  font-size: 1.25em;
+  margin-bottom: 15px;
+  color: #3498db;
+}
+
+/* Message Styling */
+.message {
+  font-size: 1em;
+  color: #27ae60;
+  margin-top: 20px;
+  display: none; /* Hide by default, show when needed */
+}
+
+.message.show {
+  display: block;
 }

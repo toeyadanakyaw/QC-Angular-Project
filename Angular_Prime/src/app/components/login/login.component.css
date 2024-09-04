@@ -6,7 +6,13 @@
     background-color: #dfdcdc;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+.lock-message {
+    color: red;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
 .login-container {
     width: 100%;
     max-width: 400px;

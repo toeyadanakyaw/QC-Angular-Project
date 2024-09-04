@@ -1,39 +1,136 @@
-<div class="form-container">
-  <div class="mb-3">
-    <label for="groupTitle" class="form-label">Group Title</label>
-    <input type="text" class="form-control" id="groupTitle" placeholder="Enter group title">
-  </div>
-  <div class="mb-3">
-    <label for="staffSelect" class="form-label">Select Staff Members</label>
-    <select class="form-select" id="staffSelect" name="staff[]" multiple (change)="onStaffSelectChange($event)">
-      <option value="staff1" data-position="Position 1">Staff 1 - Position 1</option>
-      <option value="staff2" data-position="Position 2">Staff 2 - Position 2</option>
-      <option value="staff3" data-position="Position 3">Staff 3 - Position 3</option>
-      <option value="staff4" data-position="Position 1">Staff 4 - Position 1</option>
-      <option value="staff5" data-position="Position 2">Staff 5 - Position 2</option>
-    </select>
-    <input type="text" class="form-control mt-2" id="selectedStaff" [value]="selectedStaffDisplay" readonly>
-  </div>
-  <div class="mb-3">
-    <button type="submit" class="btn-submit">Submit</button>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
-<div class="group-list-container">
-  <h3>Created Groups</h3>
-  <div class="card-deck">
-    <div class="card" *ngFor="let group of groups">
-      <div class="card-body">
-        <h5 class="card-title">{{ group.name }}</h5>
-        <button class="btn btn-primary" type="button" (click)="toggleStaff(group.id)">
-          {{ group.staff.length }} Staff Members
-        </button>
-        <div [id]="'collapse-' + group.id" class="collapse">
-          <ul class="staff-list">
-            <li *ngFor="let staff of group.staff">{{ staff }}</li>
-          </ul>
+</head>
+<body>
+  <div class="group-list-container">
+    <h3>Created Groups</h3>
+    
+    <div class="card-deck">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Company A</h5>
+          <button class="btn btn-primary" type="button" onclick="toggleDepartments('1')">
+            Toggle Departments
+          </button>
+          
+          <div id="collapse-1" class="collapse show">
+            <ul class="department-list">
+              <li>Department 1
+                <button onclick="displayUsersByDepartmentAndCompany('dept1', '1')">
+                  View Users
+                </button>
+              </li>
+              <li>Department 2
+                <button onclick="displayUsersByDepartmentAndCompany('dept2', '1')">
+                  View Users
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Company B</h5>
+          <button class="btn btn-primary" type="button" onclick="toggleDepartments('2')">
+            Toggle Departments
+          </button>
+          
+          <div id="collapse-2" class="collapse">
+            <ul class="department-list">
+              <li>Department 3
+                <button onclick="displayUsersByDepartmentAndCompany('dept3', '2')">
+                  View Users
+                </button>
+              </li>
+              <li>Department 4
+                <button onclick="displayUsersByDepartmentAndCompany('dept4', '2')">
+                  View Users
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="card-deck">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">All</h5>
+          <button class="btn btn-primary" onclick="displayAllUsers()">
+            View All Users
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-container">
+      <div class="mb-3">
+          <label for="groupTitle" class="form-label">Group Title</label>
+          <input type="text" class="form-control" id="groupTitle" placeholder="Enter group title" required>
+      </div>
+      <div class="mb-3">
+        <label for="staffSelect" class="form-label">Select Staff Members</label>
+        <ng-select [items]="staffMembers"
+        bindLabel="name"
+        bindValue="id"
+        placeholder="Select staff members"
+        [(ngModel)]="selectedStaffMembers"
+        [multiple]="true">
+</ng-select>
+      </div>
+      
+      <div class="mb-3">
+        <button class="btn btn-primary" onclick="createGroup()">Create</button>
+      </div>
+      <p id="message" class="message">Group created successfully!</p>
+    </div>
+
+    <div class="bottom-groups">
+      <div class="group-card">
+        <h5 class="group-title">Group 1</h5>
+        <button class="btn btn-primary" type="button" onclick="toggleStaff('group1')">
+          2 Staff Members
+        </button>
+        <div id="collapse-group1" class="collapse show">
+          <ul class="staff-list">
+            <li>User 1 (user1example.com)</li>
+            <li>User 2 (user2example.com)</li>
+          </ul>
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-primary" onclick="addStaff('group1')">Add Staff</button>
+          <button class="btn btn-danger" onclick="deleteGroup('group1')">Delete Group</button>
+        </div>
+      </div>
+
+      <!-- You can add more group cards here -->
+      <div class="group-card">
+        <h5 class="group-title">Group 2</h5>
+        <button class="btn btn-primary" type="button" onclick="toggleStaff('group2')">
+          3 Staff Members
+        </button>
+        <div id="collapse-group2" class="collapse">
+          <ul class="staff-list">
+            <li>User 3 (user3example.com)</li>
+            <li>User 4 (user4example.com)</li>
+            <li>User 5 (user5example.com)</li>
+          </ul>
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-primary" onclick="addStaff('group2')">Add Staff</button>
+          <button class="btn btn-danger" onclick="deleteGroup('group2')">Delete Group</button>
+        </div>
+      </div>
+    </div>
+   
   </div>
-</div>
+</body>
+</html>
